@@ -29,15 +29,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        details: "#E6A500",
+        details: {
+          light: "#38bdf8",
+          dark: "#E6A500",
+        },
         pink: "#f87171",
-        blueSky: "#38bdf8",
         titles: {
           dark: "#FFFFFF",
           light: "#00000",
         },
         box: {
           dark: "#545C81",
+          light: "#e0f2fe",
         },
         background: {
           light: "#FFFFFF",
