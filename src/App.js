@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { BooksList } from "./BooksList";
-import { Title } from "./Title";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
+import { BookItemSmall } from "./BookItemSmall";
+import { Main } from "./Main";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -24,18 +24,14 @@ export default function App() {
     setSection("user");
   }
   return (
-    <div
-      className={`${
-        darkMode ? "bg-background-dark" : "bg-background-light"
-      } min-h-screen`}
-    >
+    <Page darkMode={darkMode}>
       <Header
         userBooks={userBooks}
         darkMode={darkMode}
         onClick={handleToggle}
         homeButHandler={goToHome}
       />
-      <Main darkMode={darkMode} section={section} />
+      <Main darkMode={darkMode} section={section} setSection={setSection} />
       <Footer
         darkMode={darkMode}
         section={section}
@@ -43,40 +39,18 @@ export default function App() {
         searchButHandler={goToSearch}
         homeButHandler={goToHome}
       />
-    </div>
+    </Page>
   );
 }
 
-function Main({ darkMode, section }) {
+function Page({ children, darkMode }) {
   return (
-    <main className="">
-      <Title mode={darkMode} section={section} />
-      {section === "home" && <BooksList mode={darkMode} />}
-      {section === "search" && <SearchBox mode={darkMode} />}
-    </main>
-  );
-}
-
-function SearchBox({ mode }) {
-  return (
-    <div className="text-center">
-      <InputText darkMode={mode} text={`Author`} />
-      <InputText darkMode={mode} text={`Title`} />
-      <InputText darkMode={mode} text={`ISBN`} />
-    </div>
-  );
-}
-
-function InputText({ darkMode, text }) {
-  return (
-    <div>
-      <input
-        type="text"
-        className={`m-4 p-2 rounded-lg w-1/4 outline-none ${
-          darkMode ? "bg-box-dark" : "bg-box-light" 
-        } hover:border hover:transition hover:delay-100`}
-        placeholder={text}
-      ></input>
+    <div
+      className={`container mx-auto pb-20 ${
+        darkMode ? "bg-background-dark" : "bg-background-light"
+      } min-h-screen `}
+    >
+      {children}
     </div>
   );
 }
